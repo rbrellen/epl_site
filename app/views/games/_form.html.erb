@@ -1,0 +1,13 @@
+<%= form_for(@game) do |f| %>
+  <%= f.label :date, "Match Date" %>
+  <%= f.date_field :date %>
+  <%= f.label :home_team_id, "Home Team" %>
+  <%= f.collection_select :home_team_id, Team.order(:name), :id, :name, include_blank: true %>
+  <%= f.label :away_team_id, "Away Team" %>
+  <%= f.collection_select :away_team_id, Team.order(:name), :id, :name, include_blank: true %>
+  <%= f.label :home_team_score %>
+  <%= f.number_field :home_team_score %>
+  <%= f.label :away_team_score %>
+  <%= f.number_field :away_team_score %>
+  <%= f.submit "Create Match", class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,58 @@
+<% provide(:title, "League Table") %>
+
+<h1>League Table</h1>
+
+<div class="container">
+
+</div>
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <% if admin_signed_in? %>
+      <div class="row text-center">
+        <%= link_to "Add a Team", new_team_path, class: "btn btn-lg btn-primary btn-block" %>
+      </div>
+      <br>
+    <% end %>
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>MP</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+            <th>Pts</th>
+            <% if admin_signed_in? %>
+              <th colspan="2"></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @teams.each do |team| %>
+            <tr>
+              <td><%= link_to team.name, team_path(team) %></td>
+              <td><%= team.matches_played %></td>
+              <td><%= team.wins %></td>
+              <td><%= team.draws %></td>
+              <td><%= team.losses %></td>
+              <td><%= team.goals_for %></td>
+              <td><%= team.goals_against %></td>
+              <td><%= team.goal_differential %></td>
+              <td><%= team.points %></td>
+              <% if admin_signed_in? %>
+                <td><%= link_to 'Edit', edit_team_path(team) %></td>
+                <td><%= link_to 'Delete', team_path(team),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
